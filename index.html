@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shane Israel — Full Stack Engineer</title>
+    <meta
+      name="description"
+      content="Shane Israel — Full Stack Engineer & Engineering Lead. Building scalable web applications and leading engineering teams."
+    />
+    <link rel="canonical" href="https://shaneisrael.dev" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            xs: "480px",
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+            "2xl": "1536px",
+          },
+          extend: {
+            colors: {
+              brand: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+              },
+              dark: {
+                950: "#05080f",
+                900: "#0a0f1a",
+                800: "#0f172a",
+                700: "#1e293b",
+                600: "#334155",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "Fira Code", "monospace"],
+            },
+            animation: {
+              "fade-in-up": "fadeInUp 0.6s ease-out forwards",
+              "fade-in": "fadeIn 0.5s ease-out forwards",
+              "pulse-slow": "pulse 3s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeInUp: {
+                "0%": { opacity: "0", transform: "translateY(24px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      html {
+        background-color: #0a0f1a;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0f1a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1d4ed8;
+        border-radius: 3px;
+      }
+
+      /* Nav active link */
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #3b82f6;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Section reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      /* Gradient mesh background for hero */
+      .hero-bg {
+        background-color: #0a0f1a;
+        background-image:
+          radial-gradient(
+            ellipse 80% 60% at 60% -10%,
+            rgba(37, 99, 235, 0.18) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 50% 40% at 0% 80%,
+            rgba(29, 78, 216, 0.1) 0%,
+            transparent 60%
+          );
+      }
+
+      /* Grid dot pattern */
+      .dot-grid {
+        background-image: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.12) 1px,
+          transparent 1px
+        );
+        background-size: 28px 28px;
+      }
+
+      /* Glow ring on profile image */
+      .profile-ring {
+        background: conic-gradient(
+          from 180deg,
+          #3b82f6,
+          #1d4ed8,
+          #0a0f1a,
+          #1d4ed8,
+          #3b82f6
+        );
+        animation: spin 8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Timeline connector */
+      .timeline-line {
+        background: linear-gradient(to bottom, #1d4ed8, rgba(29, 78, 216, 0.1));
+      }
+
+      /* Skill pill hover */
+      .skill-pill {
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background-color 0.2s ease;
+      }
+      .skill-pill:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 16px rgba(59, 130, 246, 0.35);
+        background-color: rgba(37, 99, 235, 0.3);
+      }
+
+      /* Project card hover */
+      .project-card {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          border-color 0.25s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(37, 99, 235, 0.18);
+        border-color: rgba(59, 130, 246, 0.5);
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-slate-300 bg-dark-900 antialiased">
+    <!-- ============================================================
+       TOP NAVIGATION
+  ============================================================ -->
+    <nav
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    >
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <a
+            href="#hero"
+            class="text-white font-semibold text-lg tracking-tight hover:text-brand-400 transition-colors"
+          >
+            <span class="text-brand-400 font-mono">&lt;</span>SI<span
+              class="text-brand-400 font-mono"
+              >/&gt;</span
+            >
+          </a>
+
+          <!-- Desktop nav -->
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="#about"
+              class="nav-link text-sm text-slate-400 hover:text-white transition-colors"
+              >About</a
+            >
+            <a
+              href="#experience"
+              class="nav-link text-sm text-slate-400 hover:text-white transition-colors"
+              >Experience</a
+            >
+            <a
+              href="#projects"
+              class="nav-link text-sm text-slate-400 hover:text-white transition-colors"
+              >Projects</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-sm text-slate-400 hover:text-white transition-colors"
+              >Skills</a
+            >
+            <a
+              href="#contact"
+              class="bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+            >
+              Get In Touch
+            </a>
+          </div>
+
+          <!-- Mobile hamburger -->
+          <button
+            id="menu-btn"
+            class="md:hidden text-slate-400 hover:text-white transition-colors p-1"
+            aria-label="Toggle menu"
+          >
+            <svg
+              id="icon-open"
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+            <svg
+              id="icon-close"
+              class="w-6 h-6 hidden"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden hidden border-t border-dark-700 bg-dark-900/95 backdrop-blur-md"
+      >
+        <div class="px-6 py-4 flex flex-col gap-4">
+          <a
+            href="#about"
+            class="text-slate-300 hover:text-white transition-colors"
+            onclick="closeMobileMenu()"
+            >About</a
+          >
+          <a
+            href="#experience"
+            class="text-slate-300 hover:text-white transition-colors"
+            onclick="closeMobileMenu()"
+            >Experience</a
+          >
+          <a
+            href="#projects"
+            class="text-slate-300 hover:text-white transition-colors"
+            onclick="closeMobileMenu()"
+            >Projects</a
+          >
+          <a
+            href="#skills"
+            class="text-slate-300 hover:text-white transition-colors"
+            onclick="closeMobileMenu()"
+            >Skills</a
+          >
+          <a
+            href="#contact"
+            class="text-brand-400 font-medium hover:text-brand-300 transition-colors"
+            onclick="closeMobileMenu()"
+            >Get In Touch</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============================================================
+       1. HERO SECTION
+  ============================================================ -->
+    <section
+      id="hero"
+      class="hero-bg dot-grid min-h-screen flex items-center relative overflow-hidden"
+    >
+      <!-- Decorative blur blobs -->
+      <div
+        class="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-700/10 rounded-full blur-3xl pointer-events-none"
+      ></div>
+      <div
+        class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-brand-600/8 rounded-full blur-3xl pointer-events-none"
+      ></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-24 w-full">
+        <div
+          class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20"
+        >
+          <!-- Text content -->
+          <div class="flex-1 text-center lg:text-left">
+            <div
+              class="inline-flex items-center gap-2 bg-brand-700/20 border border-brand-700/40 text-brand-300 text-xs font-mono px-3 py-1.5 rounded-full mb-6 animate-fade-in"
+            >
+              <span
+                class="w-2 h-2 bg-green-400 rounded-full animate-pulse-slow"
+              ></span>
+              Available for opportunities
+            </div>
+
+            <h1
+              class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 animate-fade-in-up"
+            >
+              Shane <span class="text-brand-400">Israel</span>
+            </h1>
+
+            <div
+              class="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-6 animate-fade-in-up"
+              style="animation-delay: 0.1s"
+            >
+              <span
+                class="bg-dark-700 border border-dark-600 text-slate-300 text-sm px-3 py-1 rounded-full"
+                >Full Stack Engineer</span
+              >
+              <span class="text-slate-600">·</span>
+              <span
+                class="bg-dark-700 border border-dark-600 text-slate-300 text-sm px-3 py-1 rounded-full"
+                >Engineering Lead</span
+              >
+              <span class="text-slate-600">·</span>
+              <span
+                class="bg-dark-700 border border-dark-600 text-slate-300 text-sm px-3 py-1 rounded-full"
+                >Founding Engineer</span
+              >
+            </div>
+
+            <p
+              class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up"
+              style="animation-delay: 0.2s"
+            >
+              I design and build full-stack web applications from the ground up
+              — from architecting production infrastructure to crafting polished
+              user experiences. I thrive as an early-stage engineer where
+              ownership and impact are limitless.
+            </p>
+
+            <div
+              class="flex flex-wrap items-center justify-center lg:justify-start gap-4 animate-fade-in-up"
+              style="animation-delay: 0.3s"
+            >
+              <a
+                href="#contact"
+                class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-600/25"
+              >
+                Get In Touch
+              </a>
+              <a
+                href="#projects"
+                class="border border-slate-700 hover:border-brand-500 text-slate-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all"
+              >
+                View Projects
+              </a>
+              <a
+                href="https://github.com/ShaneIsrael"
+                target="_blank"
+                rel="noopener"
+                class="text-slate-500 hover:text-slate-300 transition-colors"
+                aria-label="GitHub"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shane-israel-3a685ba1/"
+                target="_blank"
+                rel="noopener"
+                class="text-slate-500 hover:text-slate-300 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Profile image -->
+          <div
+            class="flex-shrink-0 animate-fade-in"
+            style="animation-delay: 0.15s"
+          >
+            <div class="relative w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64">
+              <!-- Spinning gradient ring -->
+              <div class="profile-ring absolute inset-0 rounded-full p-[3px]">
+                <div class="w-full h-full rounded-full bg-dark-900"></div>
+              </div>
+              <!-- Image -->
+              <div
+                class="absolute inset-[3px] rounded-full bg-dark-900 overflow-hidden"
+              >
+                <img
+                  src="assets/profile.jpg"
+                  alt="Shane Israel"
+                  class="w-full h-full object-cover rounded-full"
+                />
+              </div>
+              <!-- Online dot -->
+              <div
+                class="absolute bottom-3 right-3 w-5 h-5 bg-green-400 rounded-full border-2 border-dark-900"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-600 animate-bounce"
+      >
+        <span class="text-xs font-mono">scroll</span>
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       2. ABOUT SECTION
+  ============================================================ -->
+    <section id="about" class="py-14 md:py-24 bg-dark-950">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-3 mb-10 md:mb-16 reveal">
+          <span class="text-brand-400 font-mono text-sm flex-shrink-0"
+            >01.</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-white whitespace-nowrap"
+          >
+            About Me
+          </h2>
+          <div class="flex-1 h-px bg-dark-700"></div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-5 reveal">
+            <p class="text-slate-300 leading-relaxed text-lg">
+              Hey! I'm Shane — a full stack engineer based in the United States
+              with over a decade of professional experience turning ideas into
+              production-grade software.
+            </p>
+            <p class="text-slate-400 leading-relaxed">
+              I got my start building internal tooling and loan processing
+              systems at SoFi, where I learned how impactful well-crafted
+              developer tools can be for an entire engineering organization.
+              That early experience set the tone for my career: I love solving
+              real problems with clean, maintainable software.
+            </p>
+            <p class="text-slate-400 leading-relaxed">
+              Over the years I've gravitated toward founding-engineer roles
+              where I can own the full lifecycle of a product — from designing
+              the database schema and cloud infrastructure to shipping the
+              polished front-end that users touch. I have a particular fondness
+              for React, Node.js, and getting infrastructure right the first
+              time.
+            </p>
+            <p class="text-slate-400 leading-relaxed">
+              When I'm not writing code professionally, I'm usually working on
+              open source projects, exploring new technologies, or gaming. I
+              believe great software comes from genuine curiosity and a healthy
+              obsession with the details.
+            </p>
+          </div>
+
+          <div class="reveal reveal-delay-2">
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+              <div
+                class="bg-dark-800 border border-dark-700 rounded-2xl p-4 sm:p-6 text-center hover:border-brand-700/50 transition-colors"
+              >
+                <div class="text-2xl sm:text-3xl font-bold text-brand-400 mb-1">
+                  10+
+                </div>
+                <div class="text-slate-400 text-xs sm:text-sm">
+                  Years of Experience
+                </div>
+              </div>
+              <div
+                class="bg-dark-800 border border-dark-700 rounded-2xl p-4 sm:p-6 text-center hover:border-brand-700/50 transition-colors"
+              >
+                <div class="text-2xl sm:text-3xl font-bold text-brand-400 mb-1">
+                  4
+                </div>
+                <div class="text-slate-400 text-xs sm:text-sm">
+                  Companies & Startups
+                </div>
+              </div>
+              <div
+                class="bg-dark-800 border border-dark-700 rounded-2xl p-4 sm:p-6 text-center hover:border-brand-700/50 transition-colors"
+              >
+                <div class="text-2xl sm:text-3xl font-bold text-brand-400 mb-1">
+                  6+
+                </div>
+                <div class="text-slate-400 text-xs sm:text-sm">
+                  Open Source Projects
+                </div>
+              </div>
+              <div
+                class="bg-dark-800 border border-dark-700 rounded-2xl p-4 sm:p-6 text-center hover:border-brand-700/50 transition-colors"
+              >
+                <div class="text-2xl sm:text-3xl font-bold text-brand-400 mb-1">
+                  2x
+                </div>
+                <div class="text-slate-400 text-xs sm:text-sm">
+                  Founding Engineer
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="mt-6 bg-dark-800 border border-dark-700 rounded-2xl p-6 hover:border-brand-700/50 transition-colors"
+            >
+              <h3 class="text-white font-semibold mb-3">
+                What I bring to a team
+              </h3>
+              <ul class="space-y-2 text-slate-400 text-sm">
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-400 mt-0.5">▸</span> Full ownership
+                  from architecture to deployment
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-400 mt-0.5">▸</span> Strong opinions
+                  on DX, code quality & maintainability
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-400 mt-0.5">▸</span> Experience
+                  mentoring and growing junior engineers
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-400 mt-0.5">▸</span> Comfortable
+                  bridging product, design & engineering
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-400 mt-0.5">▸</span> Track record of
+                  shipping at speed without cutting corners
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       3. EXPERIENCE SECTION
+  ============================================================ -->
+    <section id="experience" class="py-14 md:py-24 bg-dark-900">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-3 mb-10 md:mb-16 reveal">
+          <span class="text-brand-400 font-mono text-sm flex-shrink-0"
+            >02.</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-white whitespace-nowrap"
+          >
+            Experience
+          </h2>
+          <div class="flex-1 h-px bg-dark-700"></div>
+        </div>
+
+        <div class="relative">
+          <!-- Vertical timeline line -->
+          <div
+            class="absolute left-8 top-0 bottom-0 w-px timeline-line hidden md:block"
+          ></div>
+
+          <div class="space-y-8">
+            <!-- ── Ascension ── -->
+            <div class="reveal group">
+              <div class="md:pl-20 relative">
+                <div
+                  class="hidden md:flex absolute left-0 top-6 w-16 items-center justify-end"
+                >
+                  <div
+                    class="w-4 h-4 rounded-full bg-brand-500 border-2 border-dark-900 ring-2 ring-brand-500/30 group-hover:ring-brand-500/60 transition-all"
+                  ></div>
+                </div>
+                <div
+                  class="bg-dark-800 border border-dark-700 group-hover:border-brand-700/50 rounded-2xl p-6 transition-all"
+                >
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-start gap-4 mb-4"
+                  >
+                    <div
+                      class="w-12 h-12 rounded-xl bg-white border border-dark-600 flex items-center justify-center overflow-hidden flex-shrink-0"
+                    >
+                      <img
+                        src="assets/companies/ascensionsoftware_logo.jpg"
+                        alt="Ascension"
+                        class="w-full h-full object-cover"
+                        onerror="
+                          this.parentElement.innerHTML =
+                            '<span class=\'text-brand-600 font-bold text-xs\'>AS</span>'
+                        "
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                        <h3 class="text-white font-semibold text-lg">
+                          Founding Engineer
+                        </h3>
+                        <span
+                          class="bg-brand-700/25 text-brand-300 text-xs font-medium px-2 py-0.5 rounded-full border border-brand-700/40"
+                          >Current</span
+                        >
+                      </div>
+                      <div
+                        class="flex flex-col xs:flex-row xs:flex-wrap xs:items-center gap-x-2 gap-y-0.5 text-sm text-slate-400 mt-0.5"
+                      >
+                        <span class="text-slate-300 font-medium"
+                          >Ascension</span
+                        >
+                        <span class="hidden xs:inline text-slate-600">·</span>
+                        <span>Full-time &middot; Remote</span>
+                        <span class="hidden xs:inline text-slate-600">·</span>
+                        <span class="font-mono text-xs"
+                          >Jan 2025 – Present</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="space-y-2 text-slate-400 text-sm">
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Designed and built the full web application from the
+                      ground up using React, Node.js, PostgreSQL, and
+                      TailwindCSS.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Implemented flexible user authentication supporting
+                      standard sessions, Okta SSO, and 2FA via Twilio SMS or
+                      authenticator app.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Built and manages CI/CD pipelines enabling
+                      high-availability deployments across multiple environments
+                      with minimal downtime.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Architected and maintains the full production
+                      infrastructure on DigitalOcean, including managed
+                      databases, S3 Spaces, App Platform, and Redis clusters.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Built a PDF generation and templating system using Anvil,
+                      allowing customers to produce fully customized documents
+                      on demand.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Leads technical interviews for engineering candidates and
+                      drives SOC2 compliance efforts through Vanta.
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >React</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Node.js</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >PostgreSQL</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >TailwindCSS</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Digital Ocean</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Okta SSO</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >SOC2 / Vanta</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Themis ── -->
+            <div class="reveal reveal-delay-1 group">
+              <div class="md:pl-20 relative">
+                <div
+                  class="hidden md:flex absolute left-0 top-6 w-16 items-center justify-end"
+                >
+                  <div
+                    class="w-4 h-4 rounded-full bg-slate-600 border-2 border-dark-900 ring-2 ring-slate-600/30 group-hover:ring-slate-500/60 transition-all"
+                  ></div>
+                </div>
+                <div
+                  class="bg-dark-800 border border-dark-700 group-hover:border-brand-700/50 rounded-2xl p-6 transition-all"
+                >
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-start gap-4 mb-4"
+                  >
+                    <div
+                      class="w-12 h-12 rounded-xl bg-white border border-dark-600 flex items-center justify-center overflow-hidden flex-shrink-0"
+                    >
+                      <img
+                        src="assets/companies/themis_logo.jpg"
+                        alt="Themis"
+                        class="w-full h-full object-cover"
+                        onerror="
+                          this.parentElement.innerHTML =
+                            '<span class=\'text-gray-700 font-bold text-xs\'>TH</span>'
+                        "
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-white font-semibold text-lg mb-0.5">
+                        Senior Software Engineer
+                      </h3>
+                      <div
+                        class="flex flex-col xs:flex-row xs:flex-wrap xs:items-center gap-x-2 gap-y-0.5 text-sm text-slate-400 mt-0.5"
+                      >
+                        <span class="text-slate-300 font-medium">Themis</span>
+                        <span class="hidden xs:inline text-slate-600">·</span>
+                        <span>Full-time &middot; Remote</span>
+                        <span class="hidden xs:inline text-slate-600">·</span>
+                        <span class="font-mono text-xs"
+                          >Jan 2024 – Sep 2024</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="space-y-2 text-slate-400 text-sm">
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Identified and resolved performance bottlenecks across
+                      the React front-end, significantly improving application
+                      responsiveness.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Translated Figma designs into polished, production-ready
+                      UI components in close collaboration with the product and
+                      design teams.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Partnered with the product team to scope, develop, and
+                      ship customer-requested features on a rapid release
+                      cadence.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Mentored junior engineers on React patterns, component
+                      architecture, and design-to-code workflows in Figma.
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >React</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >TypeScript</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Figma</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Mentorship</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Stage ── -->
+            <div class="reveal reveal-delay-2 group">
+              <div class="md:pl-20 relative">
+                <div
+                  class="hidden md:flex absolute left-0 top-6 w-16 items-center justify-end"
+                >
+                  <div
+                    class="w-4 h-4 rounded-full bg-slate-600 border-2 border-dark-900 ring-2 ring-slate-600/30 group-hover:ring-slate-500/60 transition-all"
+                  ></div>
+                </div>
+                <div
+                  class="bg-dark-800 border border-dark-700 group-hover:border-brand-700/50 rounded-2xl p-6 transition-all"
+                >
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-start gap-4 mb-4"
+                  >
+                    <div
+                      class="w-12 h-12 rounded-xl bg-white border border-dark-600 flex items-center justify-center overflow-hidden flex-shrink-0"
+                    >
+                      <img
+                        src="assets/companies/heystage_logo.jpg"
+                        alt="Stage"
+                        class="w-full h-full object-cover"
+                        onerror="
+                          this.parentElement.innerHTML =
+                            '<span class=\'text-gray-700 font-bold text-xs\'>ST</span>'
+                        "
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-white font-semibold text-lg mb-0.5">
+                        Founding Engineer
+                      </h3>
+                      <div
+                        class="flex flex-col xs:flex-row xs:flex-wrap xs:items-center gap-x-2 gap-y-0.5 text-sm text-slate-400 mt-0.5"
+                      >
+                        <span class="text-slate-300 font-medium">Stage</span>
+                        <span class="hidden xs:inline text-slate-600">·</span>
+                        <span>Full-time &middot; Remote</span>
+                        <span class="hidden xs:inline text-slate-600">·</span>
+                        <span class="font-mono text-xs"
+                          >Nov 2021 – Dec 2023</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="space-y-2 text-slate-400 text-sm">
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Built and maintained multi-environment infrastructure
+                      (production, staging, and test) for Dockerized services
+                      using Kubernetes, Nginx, and Doppler for secrets
+                      management.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Authored and maintained GitHub Actions CI/CD workflows
+                      covering container builds, image publishing, environment
+                      deployments, merge request validation, and automated
+                      database migrations.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Developed Stage's React front-end in close collaboration
+                      with UI/UX designers and backend engineers, owning
+                      components from design handoff through to production.
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-400 mt-0.5 flex-shrink-0">▸</span
+                      >Contributed backend features as needed, including Kotlin
+                      API controllers and PostgreSQL schema changes.
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >React</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Kubernetes</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Docker</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >CI/CD</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Kotlin</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >PostgreSQL</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── SoFi ── -->
+            <div class="reveal reveal-delay-3 group">
+              <div class="md:pl-20 relative">
+                <div
+                  class="hidden md:flex absolute left-0 top-6 w-16 items-center justify-end"
+                >
+                  <div
+                    class="w-4 h-4 rounded-full bg-slate-600 border-2 border-dark-900 ring-2 ring-slate-600/30 group-hover:ring-slate-500/60 transition-all"
+                  ></div>
+                </div>
+                <div
+                  class="bg-dark-800 border border-dark-700 group-hover:border-brand-700/50 rounded-2xl p-6 transition-all"
+                >
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-start gap-4 mb-4"
+                  >
+                    <div
+                      class="w-12 h-12 rounded-xl bg-white border border-dark-600 flex items-center justify-center overflow-hidden flex-shrink-0"
+                    >
+                      <img
+                        src="assets/companies/sofi_logo.jpg"
+                        alt="SoFi"
+                        class="w-full h-full object-cover"
+                        onerror="
+                          this.parentElement.innerHTML =
+                            '<span class=\'text-gray-700 font-bold text-xs\'>SF</span>'
+                        "
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                        <h3 class="text-white font-semibold text-lg">SoFi</h3>
+                        <span
+                          class="bg-slate-700/50 text-slate-400 text-xs font-medium px-2 py-0.5 rounded-full"
+                          >6 yrs 7 mos</span
+                        >
+                      </div>
+                      <div class="text-sm text-slate-400">Helena, Montana</div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-6">
+                    <div class="border-l-2 border-brand-700/40 pl-4">
+                      <div
+                        class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm mb-3"
+                      >
+                        <span class="text-white font-medium"
+                          >Senior Software Engineer</span
+                        >
+                        <span class="text-slate-500 font-mono text-xs"
+                          >Jun 2018 – Nov 2021 · 3 yrs 6 mos</span
+                        >
+                      </div>
+                      <ul class="space-y-2 text-slate-400 text-sm">
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Led the design and development of an internal automation platform that enabled business teams to configure, send, and receive loan origination files, NACHA files, and third-party data transfers. Outbound files were automatically encrypted, while inbound files were processed through a flexible job and script pipeline that employees could define themselves — functioning as a full internal SaaS product for file exchange and processing.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Designed and developed Kraken, an internal tool that
+                          automatically provisions AWS instances running the
+                          company's full software stack for development and QA
+                          environments.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Kraken was adopted org-wide, becoming the standard
+                          environment provisioning solution across the entire
+                          engineering organization.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Gathered feedback from engineering and business teams
+                          to identify gaps and build targeted improvements to
+                          internal automated systems.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Maintained and iterated on an internal automated
+                          third-party integration system and its companion web
+                          application.
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="border-l-2 border-dark-600 pl-4">
+                      <div
+                        class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm mb-3"
+                      >
+                        <span class="text-white font-medium"
+                          >Software Engineer</span
+                        >
+                        <span class="text-slate-500 font-mono text-xs"
+                          >May 2015 – Jun 2018 · 3 yrs 2 mos</span
+                        >
+                      </div>
+                      <ul class="space-y-2 text-slate-400 text-sm">
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Maintained internal loan application processing
+                          software and customer-facing tools for online
+                          application creation.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Designed and developed a centralized password and
+                          database access control system that was adopted
+                          company-wide as the standard for user permission
+                          management.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Built a variety of internal tooling web applications
+                          on request from engineering teams, streamlining
+                          day-to-day workflows and reducing manual overhead.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Designed and developed an automated Docker and
+                          RunDeck pipeline to ingest and deliver thousands of
+                          daily NACHA files, cash distribution files, and loan
+                          servicing records to and from third-party systems.
+                        </li>
+                        <li class="flex items-start gap-2">
+                          <span class="text-brand-400 mt-0.5 flex-shrink-0"
+                            >▸</span
+                          >Built a companion web UI for the pipeline featuring
+                          real-time error reporting, job status visibility, and
+                          one-click manual retries.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >AWS</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Docker</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >RunDeck</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Internal Tooling</span
+                    >
+                    <span
+                      class="text-xs bg-dark-700 text-slate-400 px-2 py-1 rounded-md"
+                      >Access Control</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       4. PROJECTS SECTION
+  ============================================================ -->
+    <section id="projects" class="py-14 md:py-24 bg-dark-950">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-3 mb-10 md:mb-16 reveal">
+          <span class="text-brand-400 font-mono text-sm flex-shrink-0"
+            >03.</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-white whitespace-nowrap"
+          >
+            Personal Projects
+          </h2>
+          <div class="flex-1 h-px bg-dark-700"></div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <!-- Fireshare -->
+          <div
+            class="project-card reveal bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
+                <img
+                  src="assets/projects/fireshare_logo.png"
+                  alt="Fireshare"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://fireshare.net"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="Live site"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/ShaneIsrael/fireshare"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="GitHub"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="text-white font-semibold text-lg mb-2">Fireshare</h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">
+              Self-hosted video sharing service. Share your gaming clips, screen
+              recordings, and other videos with unique links — no accounts
+              required for viewers.
+            </p>
+            <div
+              class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-dark-700"
+            >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >React</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Python</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Docker</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Self-hosted</span
+              >
+            </div>
+          </div>
+
+          <!-- Snapsmaps -->
+          <div
+            class="project-card reveal reveal-delay-1 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
+                <img
+                  src="assets/projects/snapsmaps_logo.png"
+                  alt="Snapsmaps"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://snapsmaps.com"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="Live site"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/ShaneIsrael/Snapsmaps"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="GitHub"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="text-white font-semibold text-lg mb-2">Snapsmaps</h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">
+              A photo sharing platform where users can tag photos to real-world
+              map locations, creating a visual, geo-tagged record of moments and
+              places.
+            </p>
+            <div
+              class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-dark-700"
+            >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >React</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Node.js</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Maps API</span
+              >
+            </div>
+          </div>
+
+          <!-- Animetrics -->
+          <div
+            class="project-card reveal reveal-delay-2 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
+                <img
+                  src="assets/projects/animetrics_logo.png"
+                  alt="Animetrics"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://github.com/ShaneIsrael/animetrics"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="GitHub"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="text-white font-semibold text-lg mb-2">Animetrics</h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">
+              Track and visualize your anime watching habits with detailed stats
+              and metrics. See your history, favorite genres, and watch-time
+              breakdowns in one place.
+            </p>
+            <div
+              class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-dark-700"
+            >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >React</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Node.js</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Analytics</span
+              >
+            </div>
+          </div>
+
+          <!-- Apollo -->
+          <div
+            class="project-card reveal bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
+                <img
+                  src="assets/projects/apollo_logo.png"
+                  alt="Apollo"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://github.com/ShaneIsrael/Apollo"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="GitHub"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="text-white font-semibold text-lg mb-2">Apollo</h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">
+              A personal automation and workflow tooling project — bringing
+              together utilities that make day-to-day development tasks faster
+              and more reliable.
+            </p>
+            <div
+              class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-dark-700"
+            >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Automation</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Tooling</span
+              >
+            </div>
+          </div>
+
+          <!-- Coop Friend Finder -->
+          <div
+            class="project-card reveal reveal-delay-1 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div
+                class="w-10 h-10 bg-brand-700/20 border border-brand-700/30 rounded-xl flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5 text-brand-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://github.com/ShaneIsrael/coop-friend-finder"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="GitHub"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="text-white font-semibold text-lg mb-2">
+              Coop Friend Finder
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">
+              A matchmaking tool for gamers looking for co-op partners. Browse
+              and connect with others who want to play the same games — because
+              co-op is always better with friends.
+            </p>
+            <div
+              class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-dark-700"
+            >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Web App</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Gaming</span
+              >
+            </div>
+          </div>
+
+          <!-- Snipping Tool++ -->
+          <div
+            class="project-card reveal reveal-delay-2 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <!-- White container clips the light bg to rounded corners -->
+              <div
+                class="w-10 h-10 bg-white rounded-xl overflow-hidden flex-shrink-0"
+              >
+                <img
+                  src="assets/projects/snippingtoolplusplus_logo.png"
+                  alt="Snipping Tool++"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://github.com/ShaneIsrael/SnippingToolPlusPlus"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-slate-500 hover:text-brand-400 transition-colors"
+                  title="GitHub"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="text-white font-semibold text-lg mb-2">
+              Snipping Tool++
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed flex-1">
+              An enhanced Windows screenshot utility extending the built-in
+              Snipping Tool with instant clipboard uploads, annotation, and
+              streamlined sharing workflows.
+            </p>
+            <div
+              class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-dark-700"
+            >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >C#</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Windows</span
+              >
+              <span
+                class="text-xs text-slate-500 bg-dark-700 px-2 py-1 rounded-md"
+                >Desktop App</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10 reveal">
+          <a
+            href="https://github.com/ShaneIsrael"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 border border-dark-700 hover:border-brand-600 text-slate-400 hover:text-white px-6 py-3 rounded-xl transition-all text-sm font-medium"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            View all projects on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       5. SKILLS SECTION
+  ============================================================ -->
+    <section id="skills" class="py-14 md:py-24 bg-dark-900">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-3 mb-10 md:mb-16 reveal">
+          <span class="text-brand-400 font-mono text-sm flex-shrink-0"
+            >04.</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-white whitespace-nowrap"
+          >
+            Skills
+          </h2>
+          <div class="flex-1 h-px bg-dark-700"></div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14 md:mb-16">
+          <!-- Frontend -->
+          <div class="reveal">
+            <div class="flex items-center gap-3 mb-5">
+              <div
+                class="w-8 h-8 bg-brand-700/20 border border-brand-700/30 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-brand-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-white font-semibold">Frontend</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >React.js</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >JavaScript</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >TypeScript</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >TailwindCSS</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Figma</span
+              >
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div class="reveal reveal-delay-1">
+            <div class="flex items-center gap-3 mb-5">
+              <div
+                class="w-8 h-8 bg-brand-700/20 border border-brand-700/30 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-brand-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-white font-semibold">Backend</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Node.js</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >PostgreSQL</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Redis</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >TypeORM</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Sequelize</span
+              >
+            </div>
+          </div>
+
+          <!-- Infrastructure -->
+          <div class="reveal reveal-delay-2">
+            <div class="flex items-center gap-3 mb-5">
+              <div
+                class="w-8 h-8 bg-brand-700/20 border border-brand-700/30 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-brand-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-white font-semibold">Infrastructure & DevOps</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Docker</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Kubernetes</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >CI/CD Pipelines</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Full Infra Mgmt</span
+              >
+              <span
+                class="skill-pill bg-dark-800 border border-dark-700 text-slate-300 text-sm px-4 py-2 rounded-xl cursor-default"
+                >Git</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Proficiency bars -->
+        <div class="reveal">
+          <h3 class="text-white font-semibold mb-8 text-lg">
+            Core Proficiencies
+          </h3>
+          <div class="grid md:grid-cols-2 gap-x-16 gap-y-6">
+            <div>
+              <div class="flex justify-between mb-2 text-sm">
+                <span class="text-slate-300">React / Frontend</span>
+                <span class="text-brand-400 font-mono">95%</span>
+              </div>
+              <div class="h-2 bg-dark-700 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-gradient-to-r from-brand-700 to-brand-400 rounded-full bar-fill"
+                  data-width="95"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2 text-sm">
+                <span class="text-slate-300">Node.js / Backend</span>
+                <span class="text-brand-400 font-mono">92%</span>
+              </div>
+              <div class="h-2 bg-dark-700 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-gradient-to-r from-brand-700 to-brand-400 rounded-full bar-fill"
+                  data-width="92"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2 text-sm">
+                <span class="text-slate-300">TypeScript</span>
+                <span class="text-brand-400 font-mono">90%</span>
+              </div>
+              <div class="h-2 bg-dark-700 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-gradient-to-r from-brand-700 to-brand-400 rounded-full bar-fill"
+                  data-width="90"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2 text-sm">
+                <span class="text-slate-300">Infrastructure & DevOps</span>
+                <span class="text-brand-400 font-mono">88%</span>
+              </div>
+              <div class="h-2 bg-dark-700 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-gradient-to-r from-brand-700 to-brand-400 rounded-full bar-fill"
+                  data-width="88"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2 text-sm">
+                <span class="text-slate-300">Database Design</span>
+                <span class="text-brand-400 font-mono">85%</span>
+              </div>
+              <div class="h-2 bg-dark-700 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-gradient-to-r from-brand-700 to-brand-400 rounded-full bar-fill"
+                  data-width="85"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2 text-sm">
+                <span class="text-slate-300">Team Leadership</span>
+                <span class="text-brand-400 font-mono">82%</span>
+              </div>
+              <div class="h-2 bg-dark-700 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-gradient-to-r from-brand-700 to-brand-400 rounded-full bar-fill"
+                  data-width="82"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       6. CONTACT / CTA SECTION
+  ============================================================ -->
+    <section
+      id="contact"
+      class="py-14 md:py-24 bg-dark-950 relative overflow-hidden"
+    >
+      <div
+        class="absolute inset-0 dot-grid opacity-40 pointer-events-none"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-700/5 rounded-full blur-3xl pointer-events-none"
+      ></div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative">
+        <div
+          class="flex items-center justify-center gap-3 mb-10 md:mb-12 reveal"
+        >
+          <div class="flex-1 h-px bg-dark-700 max-w-[60px]"></div>
+          <span class="text-brand-400 font-mono text-sm flex-shrink-0"
+            >05.</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-white whitespace-nowrap"
+          >
+            Get In Touch
+          </h2>
+          <div class="flex-1 h-px bg-dark-700 max-w-[60px]"></div>
+        </div>
+
+        <p
+          class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12 reveal reveal-delay-1"
+        >
+          Whether you have a role to discuss, a project idea to explore, or just
+          want to connect — my inbox is always open. I'll do my best to get back
+          to you promptly.
+        </p>
+
+        <div class="reveal reveal-delay-2 mb-8 md:mb-12">
+          <a
+            href="mailto:shaneisrael9@gmail.com"
+            class="inline-flex items-center gap-2 sm:gap-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm sm:text-base lg:text-lg px-5 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-brand-600/25 hover:-translate-y-0.5 max-w-full"
+          >
+            <svg
+              class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            <span class="truncate">shaneisrael9@gmail.com</span>
+          </a>
+        </div>
+
+        <div
+          class="flex flex-wrap items-center justify-center gap-4 reveal reveal-delay-3"
+        >
+          <a
+            href="https://github.com/ShaneIsrael"
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 border border-dark-700 hover:border-brand-700/50 text-slate-300 hover:text-white px-6 py-3 rounded-xl transition-all group"
+          >
+            <svg
+              class="w-5 h-5 group-hover:text-brand-400 transition-colors"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            <span class="font-medium text-sm">GitHub</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/shane-israel-3a685ba1/"
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-3 bg-dark-800 hover:bg-dark-700 border border-dark-700 hover:border-brand-700/50 text-slate-300 hover:text-white px-6 py-3 rounded-xl transition-all group"
+          >
+            <svg
+              class="w-5 h-5 group-hover:text-brand-400 transition-colors"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              />
+            </svg>
+            <span class="font-medium text-sm">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+    <script>
+      // ── Navbar scroll effect ─────────────────────────────────────
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > 20) {
+            navbar.classList.add(
+              "bg-dark-900/95",
+              "backdrop-blur-md",
+              "border-b",
+              "border-dark-700/60",
+              "shadow-lg",
+            );
+          } else {
+            navbar.classList.remove(
+              "bg-dark-900/95",
+              "backdrop-blur-md",
+              "border-b",
+              "border-dark-700/60",
+              "shadow-lg",
+            );
+          }
+        },
+        { passive: true },
+      );
+
+      // ── Mobile menu ──────────────────────────────────────────────
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const iconOpen = document.getElementById("icon-open");
+      const iconClose = document.getElementById("icon-close");
+
+      menuBtn.addEventListener("click", () => {
+        const isOpen = !mobileMenu.classList.contains("hidden");
+        mobileMenu.classList.toggle("hidden", isOpen);
+        iconOpen.classList.toggle("hidden", !isOpen);
+        iconClose.classList.toggle("hidden", isOpen);
+      });
+
+      function closeMobileMenu() {
+        mobileMenu.classList.add("hidden");
+        iconOpen.classList.remove("hidden");
+        iconClose.classList.add("hidden");
+      }
+
+      // ── Active nav link highlight on scroll ──────────────────────
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll("a.nav-link");
+
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === "#" + entry.target.id) {
+                  link.classList.add("active");
+                }
+              });
+            }
+          });
+        },
+        { threshold: 0.35 },
+      );
+
+      sections.forEach((s) => sectionObserver.observe(s));
+
+      // ── Scroll reveal ────────────────────────────────────────────
+      const revealEls = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      revealEls.forEach((el) => revealObserver.observe(el));
+
+      // ── Animated progress bars ───────────────────────────────────
+      const bars = document.querySelectorAll(".bar-fill");
+      bars.forEach((bar) => {
+        bar.style.width = "0%";
+      });
+
+      const barObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const bar = entry.target;
+              setTimeout(() => {
+                bar.style.transition = "width 1s cubic-bezier(0.4, 0, 0.2, 1)";
+                bar.style.width = bar.getAttribute("data-width") + "%";
+              }, 200);
+              barObserver.unobserve(bar);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      bars.forEach((bar) => barObserver.observe(bar));
+
+      // ── Smooth scroll offset for fixed nav ───────────────────────
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          const target = document.querySelector(anchor.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            const top =
+              target.getBoundingClientRect().top + window.scrollY - 72;
+            window.scrollTo({ top, behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
