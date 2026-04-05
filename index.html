@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shane Israel — Full Stack Engineer</title>
+    <title>Shane Israel | Full Stack Engineer</title>
     <meta
       name="description"
-      content="Shane Israel — Full Stack Engineer & Engineering Lead. Building scalable web applications and leading engineering teams."
+      content="Shane Israel | Full Stack Engineer & Engineering Lead. Building scalable web applications and leading engineering teams."
     />
     <link rel="canonical" href="https://shaneisrael.dev" />
 
@@ -366,10 +366,8 @@
             <div
               class="inline-flex items-center gap-2 bg-brand-700/20 border border-brand-700/40 text-brand-300 text-xs font-mono px-3 py-1.5 rounded-full mb-6 animate-fade-in"
             >
-              <span
-                class="w-2 h-2 bg-green-400 rounded-full animate-pulse-slow"
-              ></span>
-              Available for opportunities
+              <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+              Not seeking new roles
             </div>
 
             <h1
@@ -402,8 +400,8 @@
               class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up"
               style="animation-delay: 0.2s"
             >
-              I design and build full-stack web applications from the ground up
-              — from architecting production infrastructure to crafting polished
+              I design and build full-stack web applications from the ground up,
+              from architecting production infrastructure to crafting polished
               user experiences. I thrive as an early-stage engineer where
               ownership and impact are limitless.
             </p>
@@ -480,7 +478,7 @@
 
       <!-- Scroll indicator -->
       <div
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-600 animate-bounce"
+        class="absolute bottom-8 inset-x-0 flex flex-col items-center gap-1 text-slate-600 animate-bounce"
       >
         <span class="text-xs font-mono">scroll</span>
         <svg
@@ -519,7 +517,7 @@
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div class="space-y-5 reveal">
             <p class="text-slate-300 leading-relaxed text-lg">
-              Hey! I'm Shane — a full stack engineer based in the United States
+              Hey! I'm Shane, a full stack engineer based in the United States
               with over a decade of professional experience turning ideas into
               production-grade software.
             </p>
@@ -532,7 +530,7 @@
             </p>
             <p class="text-slate-400 leading-relaxed">
               Over the years I've gravitated toward founding-engineer roles
-              where I can own the full lifecycle of a product — from designing
+              where I can own the full lifecycle of a product, from designing
               the database schema and cloud infrastructure to shipping the
               polished front-end that users touch. I have a particular fondness
               for React, Node.js, and getting infrastructure right the first
@@ -1220,7 +1218,7 @@
             <h3 class="text-white font-semibold text-lg mb-2">Fireshare</h3>
             <p class="text-slate-400 text-sm leading-relaxed flex-1">
               Self-hosted video sharing service. Share your gaming clips, screen
-              recordings, and other videos with unique links — no accounts
+              recordings, and other videos with unique links. No accounts
               required for viewers.
             </p>
             <div
@@ -1400,7 +1398,7 @@
             </div>
             <h3 class="text-white font-semibold text-lg mb-2">Apollo</h3>
             <p class="text-slate-400 text-sm leading-relaxed flex-1">
-              A personal automation and workflow tooling project — bringing
+              A personal automation and workflow tooling project that brings
               together utilities that make day-to-day development tasks faster
               and more reliable.
             </p>
@@ -1461,7 +1459,7 @@
             </h3>
             <p class="text-slate-400 text-sm leading-relaxed flex-1">
               A matchmaking tool for gamers looking for co-op partners. Browse
-              and connect with others who want to play the same games — because
+              and connect with others who want to play the same games, because
               co-op is always better with friends.
             </p>
             <div
@@ -1833,13 +1831,13 @@
           class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12 reveal reveal-delay-1"
         >
           Whether you have a role to discuss, a project idea to explore, or just
-          want to connect — my inbox is always open. I'll do my best to get back
+          want to connect, my inbox is always open. I'll do my best to get back
           to you promptly.
         </p>
 
         <div class="reveal reveal-delay-2 mb-8 md:mb-12">
           <a
-            href="mailto:shaneisrael9@gmail.com"
+            href="mailto:shanemisrael@gmail.com"
             class="inline-flex items-center gap-2 sm:gap-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm sm:text-base lg:text-lg px-5 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-brand-600/25 hover:-translate-y-0.5 max-w-full"
           >
             <svg
@@ -1855,7 +1853,7 @@
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            <span class="truncate">shaneisrael9@gmail.com</span>
+            <span class="truncate">shanemisrael@gmail.com</span>
           </a>
         </div>
 
@@ -1942,6 +1940,17 @@
         mobileMenu.classList.toggle("hidden", isOpen);
         iconOpen.classList.toggle("hidden", !isOpen);
         iconClose.classList.toggle("hidden", isOpen);
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !mobileMenu.classList.contains("hidden") &&
+          !mobileMenu.contains(e.target) &&
+          !menuBtn.contains(e.target)
+        ) {
+          closeMobileMenu();
+        }
       });
 
       function closeMobileMenu() {
