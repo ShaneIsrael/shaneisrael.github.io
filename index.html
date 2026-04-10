@@ -1293,6 +1293,7 @@
           <div
             class="project-card reveal reveal-delay-1 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
             data-github-repo="ShaneIsrael/Snapsmaps"
+            data-docker-repo="shaneisrael/snapsmaps"
           >
             <div class="flex items-start justify-between mb-3">
               <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
@@ -1400,7 +1401,6 @@
           <!-- Animetrics -->
           <div
             class="project-card reveal reveal-delay-2 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
-            data-github-repo="ShaneIsrael/animetrics"
           >
             <div class="flex items-start justify-between mb-3">
               <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
@@ -1453,7 +1453,6 @@
           <!-- Apollo -->
           <div
             class="project-card reveal bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
-            data-github-repo="ShaneIsrael/Apollo"
           >
             <div class="flex items-start justify-between mb-3">
               <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
@@ -1502,7 +1501,6 @@
           <!-- Coop Friend Finder -->
           <div
             class="project-card reveal reveal-delay-1 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
-            data-github-repo="ShaneIsrael/coop-friend-finder"
           >
             <div class="flex items-start justify-between mb-3">
               <div
@@ -1563,7 +1561,6 @@
           <!-- Snipping Tool++ -->
           <div
             class="project-card reveal reveal-delay-2 bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col"
-            data-github-repo="ShaneIsrael/SnippingToolPlusPlus"
           >
             <div class="flex items-start justify-between mb-3">
               <!-- White container clips the light bg to rounded corners -->
@@ -2078,14 +2075,14 @@
               formatNumber(stars) +
               "</span>";
           }
-          if (downloads > 0) {
+          if (downloads) {
             html +=
               '<span class="inline-flex items-center gap-1 text-xs text-slate-500">' +
               '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
               '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" ' +
               'd="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>' +
               "</svg>" +
-              formatNumber(downloads) +
+              downloads +
               "</span>";
           }
           html += "</div>";
@@ -2093,7 +2090,7 @@
         }
 
         function applyStats(card, stars, downloads) {
-          if (stars <= 0 && downloads <= 0) return;
+          if (stars <= 0 && !downloads) return;
           var existing = card.querySelector(".gh-stats");
           if (existing) existing.remove();
           var h3 = card.querySelector("h3");
@@ -2119,38 +2116,19 @@
           var downloadsPromise;
           if (dockerRepo) {
             downloadsPromise = fetch(
-              "https://hub.docker.com/v2/repositories/" + dockerRepo + "/",
+              "https://img.shields.io/docker/pulls/" + dockerRepo + ".json",
             )
               .then(function (r) {
                 return r.json();
               })
               .then(function (d) {
-                return d.pull_count || 0;
+                return d.value || "";
               })
               .catch(function () {
-                return 0;
+                return "";
               });
           } else {
-            downloadsPromise = fetch(
-              "https://api.github.com/repos/" + repo + "/releases",
-            )
-              .then(function (r) {
-                return r.json();
-              })
-              .then(function (releases) {
-                if (!Array.isArray(releases)) return 0;
-                return releases.reduce(function (total, release) {
-                  return (
-                    total +
-                    (release.assets || []).reduce(function (sum, asset) {
-                      return sum + (asset.download_count || 0);
-                    }, 0)
-                  );
-                }, 0);
-              })
-              .catch(function () {
-                return 0;
-              });
+            downloadsPromise = Promise.resolve("");
           }
 
           Promise.all([starsPromise, downloadsPromise]).then(
